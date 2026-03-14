@@ -1,0 +1,24 @@
+{
+  "name": "国際会議 2026 公式アプリ",
+  "short_name": "会議アプリ",
+  "description": "国際会議のスケジュールや情報を提供します",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1a2b4c",
+  "theme_color": "#1a2b4c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
