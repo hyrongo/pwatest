@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>スケジュール - 国際会議2026</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ヘッダー */
+        .page-header {
+            background-color: white;
+            padding: 50px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-button {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #1e293b;
+            line-height: 1;
+        }
+
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* タブ切り替え (3つの子機能) */
+        .feature-tabs {
+            display: flex;
+            background-color: white;
+            padding: 0 20px;
+            border-bottom: 1px solid #e9edf2;
+            gap: 20px;
+        }
+
+        .feature-tab {
+            padding: 14px 0;
+            color: #64748b;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .feature-tab.active {
+            color: #0b1e33;
+            border-bottom: 3px solid #0b1e33;
+            font-weight: 600;
+        }
+
+        /* 日付切り替え (全体スケジュール用) */
+        .date-tabs {
+            display: flex;
+            background-color: white;
+            padding: 12px 20px;
+            gap: 10px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .date-tab {
+            padding: 8px 16px;
+            border-radius: 30px;
+            background-color: #f1f5f9;
+            color: #334155;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .date-tab.active {
+            background-color: #0b1e33;
+            color: white;
+        }
+
+        /* コンテンツエリア */
+        .content-area {
+            flex: 1;
+            padding: 20px;
+            display: block;
+        }
+
+        /* スケジュールカード */
+        .session-card {
+            background-color: white;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f6;
+        }
+
+        .session-time {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .session-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .session-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .session-location::before {
+            content: "📍 ";
+        }
+
+        .session-speaker::before {
+            content: "👤 ";
+        }
+
+        .bookmark-btn {
+            margin-top: 12px;
+            padding: 8px 16px;
+            background-color: #f1f5f9;
+            border: none;
+            border-radius: 40px;
+            color: #0b1e33;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        /* 個人スケジュール用 */
+        .personal-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94a3b8;
+            background-color: white;
+            border-radius: 18px;
+        }
+
+        .personal-empty span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        /* バススケジュール */
+        .bus-schedule {
+            background-color: white;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .bus-route {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .bus-time {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 10px 0;
+            color: #334155;
+        }
+
+        .bus-time-item {
+            background-color: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        .bus-note {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e2e8f0;
+        }
+
+        /* フッター */
+        .bottom-nav {
+            display: flex;
+            background-color: white;
+            border-top: 1px solid #e9edf2;
+            padding: 8px 0;
+            margin-top: auto;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 4px;
+            text-decoration: none;
+        }
+
+        .nav-item.active {
+            color: #0b1e33;
+        }
+
+        /* 表示切り替え用 */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-button">←</a>
+        <h1>スケジュール</h1>
+    </header>
+
+    <!-- 子機能タブ (①-1, ①-2, ①-3) -->
+    <div class="feature-tabs">
+        <div class="feature-tab active" onclick="switchTab('overall')">全体</div>
+        <div class="feature-tab" onclick="switchTab('personal')">個人</div>
+        <div class="feature-tab" onclick="switchTab('bus')">送迎バス</div>
+    </div>
+
+    <!-- 全体スケジュール ①-1 -->
+    <div id="overall" class="tab-content active-content">
+        <!-- 日付タブ -->
+        <div class="date-tabs">
+            <div class="date-tab active" onclick="filterDate('all')">すべて</div>
+            <div class="date-tab" onclick="filterDate('day1')">3/14 (土)</div>
+            <div class="date-tab" onclick="filterDate('day2')">3/15 (日)</div>
+            <div class="date-tab" onclick="filterDate('day3')">3/16 (月)</div>
+        </div>
+
+        <!-- スケジュール一覧 -->
+        <div class="content-area">
+            <!-- 3/14 セッション -->
+            <div class="session-card" data-date="day1">
+                <div class="session-time">10:00 - 11:30</div>
+                <div class="session-title">基調講演: テクノロジーと人類の未来</div>
+                <div class="session-details">
+                    <span class="session-location">メインホールA</span>
+                    <span class="session-speaker">Dr. エレナ・ロドリゲス</span>
+                </div>
+                <button class="bookmark-btn" onclick="toggleBookmark(this)">📌 マイスケジュールに追加</button>
+            </div>
+
+            <div class="session-card" data-date="day1">
+                <div class="session-time">13:00 - 14:30</div>
+                <div class="session-title">パネル: アジアの経済成長戦略</div>
+                <div class="session-details">
+                    <span class="session-location">ルームB</span>
+                    <span class="session-speaker">複数名</span>
+                </div>
+                <button class="bookmark-btn" onclick="toggleBookmark(this)">📌 マイスケジュールに追加</button>
+            </div>
+
+            <div class="session-card" data-date="day1">
+                <div class="session-time">15:00 - 16:30</div>
+                <div class="session-title">AI活用ワークショップ</div>
+                <div class="session-details">
+                    <span class="session-location">ルームC</span>
+                    <span class="session-speaker">田中 博士</span>
+                </div>
+                <button class="bookmark-btn" onclick="toggleBookmark(this)">📌 マイスケジュールに追加</button>
+            </div>
+
+            <!-- 3/15 セッション -->
+            <div class="session-card" data-date="day2">
+                <div class="session-time">09:30 - 11:00</div>
+                <div class="session-title">サステナビリティ特別セッション</div>
+                <div class="session-details">
+                    <span class="session-location">ホールD</span>
+                    <span class="session-speaker">国連開発計画</span>
+                </div>
+                <button class="bookmark-btn" onclick="toggleBookmark(this)">📌 マイスケジュールに追加</button>
+            </div>
+
+            <div class="session-card" data-date="day2">
+                <div class="session-time">14:00 - 17:00</div>
+                <div class="session-title">工場見学 (要予約)</div>
+                <div class="session-details">
+                    <span class="session-location">横浜工場</span>
+                    <span class="session-speaker">案内付き</span>
+                </div>
+                <button class="bookmark-btn" onclick="toggleBookmark(this)">📌 マイスケジュールに追加</button>
+            </div>
+
+            <!-- 3/16 セッション -->
+            <div class="session-card" data-date="day3">
+                <div class="session-time">10:00 - 12:00</div>
+                <div class="session-title">クロージングセッション</div>
+                <div class="session-details">
+                    <span class="session-location">メインホールA</span>
+                    <span class="session-speaker">組織委員会</span>
+                </div>
+                <button class="bookmark-btn" onclick="toggleBookmark(this)">📌 マイスケジュールに追加</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 個人スケジュール ①-2 -->
+    <div id="personal" class="tab-content">
+        <div class="content-area">
+            <div class="personal-empty">
+                <span>📋</span>
+                <h3>個人スケジュールは空です</h3>
+                <p style="margin-top: 12px;">全体スケジュールから「追加」ボタンを押すと、ここに表示されます</p>
+            </div>
+            <!-- 実際にはJSで動的に追加されたセッションがここに表示される -->
+            <div id="personal-schedule-list" style="display: none;">
+                <!-- ここに追加されたセッションが入る -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 送迎バススケジュール ①-3 -->
+    <div id="bus" class="tab-content">
+        <div class="content-area">
+            <div class="bus-schedule">
+                <div class="bus-route">🚌 ルートA: 主要ホテル → 会場</div>
+                <div class="bus-time">
+                    <span class="bus-time-item">7:30 (ヒルトン)</span>
+                    <span class="bus-time-item">7:45 (マリオット)</span>
+                    <span class="bus-time-item">8:00 (シェラトン)</span>
+                </div>
+                <div class="bus-time">
+                    <span class="bus-time-item">8:30 (ヒルトン)</span>
+                    <span class="bus-time-item">8:45 (マリオット)</span>
+                </div>
+                <div class="bus-note">※ 朝の便は全ホテルを巡回します</div>
+            </div>
+
+            <div class="bus-schedule">
+                <div class="bus-route">🚌 ルートB: 会場 → 主要ホテル (夕方)</div>
+                <div class="bus-time">
+                    <span class="bus-time-item">17:30 発</span>
+                    <span class="bus-time-item">18:30 発</span>
+                    <span class="bus-time-item">19:30 発</span>
+                </div>
+                <div class="bus-note">降車順: シェラトン → マリオット → ヒルトン</div>
+            </div>
+
+            <div class="bus-schedule">
+                <div class="bus-route">🚌 ルートC: 工場見学 特別便</div>
+                <div class="bus-time">
+                    <span class="bus-time-item">13:00 会場発</span>
+                    <span class="bus-time-item">17:00 工場発</span>
+                </div>
+                <div class="bus-note">工場見学参加者専用 (予約必須)</div>
+            </div>
+
+            <div style="background-color: #e6f0ff; border-radius: 16px; padding: 16px; margin-top: 16px;">
+                <strong>⚠️ 注意事項</strong>
+                <p style="font-size: 0.85rem; margin-top: 6px;">・バスは定員になり次第締切<br>・遅延情報はプッシュ通知でお知らせ</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- フッターナビ -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span>🏠</span>
+            <span>ホーム</span>
+        </a>
+        <a href="schedule.html" class="nav-item active">
+            <span>📅</span>
+            <span>日程</span>
+        </a>
+        <a href="map.html" class="nav-item">
+            <span>🗺️</span>
+            <span>マップ</span>
+        </a>
+        <a href="notifications.html" class="nav-item">
+            <span>🔔</span>
+            <span>お知らせ</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span>👤</span>
+            <span>マイページ</span>
+        </a>
+    </nav>
+
+    <script>
+        // タブ切り替え (全体/個人/バス)
+        function switchTab(tabId) {
+            // タブボタンのアクティブ切り替え
+            const tabs = document.querySelectorAll('.feature-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // コンテンツの表示切り替え
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active-content');
+            });
+            document.getElementById(tabId).classList.add('active-content');
+        }
+
+        // 日付フィルター (全体スケジュール用)
+        function filterDate(date) {
+            const dateTabs = document.querySelectorAll('.date-tab');
+            dateTabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (date === 'all') {
+                document.querySelectorAll('.session-card').forEach(card => {
+                    card.style.display = 'block';
+                });
+            } else {
+                document.querySelectorAll('.session-card').forEach(card => {
+                    if (card.dataset.date === date) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // 個人スケジュール追加機能 (簡易版)
+        function toggleBookmark(btn) {
+            const sessionCard = btn.closest('.session-card');
+            const sessionTitle = sessionCard.querySelector('.session-title').textContent;
+            const sessionTime = sessionCard.querySelector('.session-time').textContent;
+            
+            if (btn.textContent.includes('追加')) {
+                btn.textContent = '✅ 追加済み';
+                btn.style.backgroundColor = '#e0f2e1';
+                
+                // 実際のアプリではここでlocalStorageなどに保存
+                alert(`「${sessionTitle}」を個人スケジュールに追加しました`);
+                
+                // 個人タブに表示 (簡易実装)
+                const personalList = document.getElementById('personal-schedule-list');
+                const emptyMsg = document.querySelector('.personal-empty');
+                
+                if (personalList.style.display === 'none') {
+                    personalList.style.display = 'block';
+                    emptyMsg.style.display = 'none';
+                }
+                
+                const newItem = document.createElement('div');
+                newItem.className = 'session-card';
+                newItem.innerHTML = `
+                    <div class="session-time">${sessionTime}</div>
+                    <div class="session-title">${sessionTitle}</div>
+                    <div style="color: #2563eb; margin-top: 8px;">✨ マイセッション</div>
+                `;
+                personalList.appendChild(newItem);
+            }
+        }
+
+        // サービスワーカー登録
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log(err));
+        }
+    </script>
+</body>
+</html>
