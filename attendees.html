@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出席者 - 国際会議2026</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background-color: #f5f7fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .page-header {
+            background-color: white;
+            padding: 50px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .back-button {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #1e293b;
+        }
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .feature-tabs {
+            display: flex;
+            background-color: white;
+            padding: 0 20px;
+            border-bottom: 1px solid #e9edf2;
+        }
+        .feature-tab {
+            padding: 14px 0;
+            color: #64748b;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+        }
+        .feature-tab.active {
+            color: #0b1e33;
+            border-bottom: 3px solid #0b1e33;
+        }
+        .content-area {
+            flex: 1;
+            padding: 20px;
+        }
+        .search-box {
+            background-color: white;
+            border-radius: 40px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .attendee-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .attendee-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #0b1e33;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .attendee-info {
+            flex: 1;
+        }
+        .attendee-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .attendee-org {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .attendee-country {
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+        .group-section {
+            margin-bottom: 24px;
+        }
+        .group-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .group-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .group-count {
+            background-color: #e2e8f0;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active-content {
+            display: block;
+        }
+        .bottom-nav {
+            display: flex;
+            background-color: white;
+            border-top: 1px solid #e9edf2;
+            padding: 8px 0;
+            margin-top: auto;
+        }
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 4px;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #0b1e33;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-button">←</a>
+        <h1>出席者</h1>
+    </header>
+
+    <div class="feature-tabs">
+        <div class="feature-tab active" onclick="switchTab('list')">📋 出席者リスト</div>
+        <div class="feature-tab" onclick="switchTab('groups')">👥 グループリスト</div>
+    </div>
+
+    <!-- ④-1 出席者リスト -->
+    <div id="list" class="tab-content active-content">
+        <div class="content-area">
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" placeholder="名前/所属で検索">
+            </div>
+            
+            <div class="attendee-card">
+                <div class="attendee-avatar">山</div>
+                <div class="attendee-info">
+                    <div class="attendee-name">山田 太郎</div>
+                    <div class="attendee-org">経済産業省 審議官</div>
+                    <div class="attendee-country">🇯🇵 日本</div>
+                </div>
+            </div>
+
+            <div class="attendee-card">
+                <div class="attendee-avatar">J</div>
+                <div class="attendee-info">
+                    <div class="attendee-name">John Smith</div>
+                    <div class="attendee-org">U.S. Department of Commerce</div>
+                    <div class="attendee-country">🇺🇸 米国</div>
+                </div>
+            </div>
+
+            <div class="attendee-card">
+                <div class="attendee-avatar">王</div>
+                <div class="attendee-info">
+                    <div class="attendee-name">王 偉</div>
+                    <div class="attendee-org">中国商務部</div>
+                    <div class="attendee-country">🇨🇳 中国</div>
+                </div>
+            </div>
+
+            <div class="attendee-card">
+                <div class="attendee-avatar">朴</div>
+                <div class="attendee-info">
+                    <div class="attendee-name">朴 ジョンフン</div>
+                    <div class="attendee-org">韓国産業通商資源部</div>
+                    <div class="attendee-country">🇰🇷 韓国</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ④-2 グループリスト -->
+    <div id="groups" class="tab-content">
+        <div class="content-area">
+            <div class="group-section">
+                <div class="group-header">
+                    <span class="group-name">🇯🇵 日本代表団</span>
+                    <span class="group-count">12名</span>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">山</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">山田 太郎</div>
+                        <div class="attendee-org">経済産業省</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">佐</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">佐藤 花子</div>
+                        <div class="attendee-org">JETRO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-section">
+                <div class="group-header">
+                    <span class="group-name">🇺🇸 米国代表団</span>
+                    <span class="group-count">15名</span>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">J</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">John Smith</div>
+                        <div class="attendee-org">商務省</div>
+                    </div>
+                </div>
+                <div class="attendee-card">
+                    <div class="attendee-avatar">M</div>
+                    <div class="attendee-info">
+                        <div class="attendee-name">Mary Johnson</div>
+                        <div class="attendee-org">USTR</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span>🏠</span>
+            <span>ホーム</span>
+        </a>
+        <a href="schedule.html" class="nav-item">
+            <span>📅</span>
+            <span>日程</span>
+        </a>
+        <a href="local.html" class="nav-item">
+            <span>📍</span>
+            <span>現地</span>
+        </a>
+        <a href="events.html" class="nav-item">
+            <span>📋</span>
+            <span>イベント</span>
+        </a>
+        <a href="attendees.html" class="nav-item active">
+            <span>👥</span>
+            <span>出席者</span>
+        </a>
+    </nav>
+
+    <script>
+        function switchTab(tabId) {
+            const tabs = document.querySelectorAll('.feature-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active-content');
+            });
+            document.getElementById(tabId).classList.add('active-content');
+        }
+    </script>
+</body>
+</html>

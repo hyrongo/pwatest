@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント概要 - 国際会議2026</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background-color: #f5f7fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .page-header {
+            background-color: white;
+            padding: 50px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .back-button {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #1e293b;
+        }
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .content-area {
+            flex: 1;
+            padding: 20px;
+        }
+        .event-section {
+            background-color: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0b1e33;
+            border-left: 5px solid #2563eb;
+            padding-left: 12px;
+        }
+        .agenda-item {
+            display: flex;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .agenda-time {
+            min-width: 80px;
+            color: #2563eb;
+            font-weight: 600;
+        }
+        .agenda-content {
+            flex: 1;
+        }
+        .agenda-title {
+            font-weight: 600;
+        }
+        .agenda-location {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .factory-tour {
+            background-color: #f0f9ff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+        .tour-info {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .tour-time {
+            background-color: #2563eb;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+        .tour-limit {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        .bottom-nav {
+            display: flex;
+            background-color: white;
+            border-top: 1px solid #e9edf2;
+            padding: 8px 0;
+            margin-top: auto;
+        }
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 4px;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #0b1e33;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-button">←</a>
+        <h1>イベント概要</h1>
+    </header>
+
+    <div class="content-area">
+        <!-- ③-1 本会議アジェンダ -->
+        <div class="event-section">
+            <div class="section-title">📋 本会議アジェンダ</div>
+            <div class="agenda-item">
+                <div class="agenda-time">3/14 10:00</div>
+                <div class="agenda-content">
+                    <div class="agenda-title">開会式・基調講演</div>
+                    <div class="agenda-location">メインホールA</div>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-time">3/14 13:00</div>
+                <div class="agenda-content">
+                    <div class="agenda-title">パネルディスカッション: アジアの未来</div>
+                    <div class="agenda-location">ルームB</div>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-time">3/15 09:30</div>
+                <div class="agenda-content">
+                    <div class="agenda-title">分科会A: テクノロジー</div>
+                    <div class="agenda-location">ルームC</div>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-time">3/15 14:00</div>
+                <div class="agenda-content">
+                    <div class="agenda-title">分科会B: サステナビリティ</div>
+                    <div class="agenda-location">ホールD</div>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-time">3/16 10:00</div>
+                <div class="agenda-content">
+                    <div class="agenda-title">クロージングセッション</div>
+                    <div class="agenda-location">メインホールA</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ③-2 工場見学 -->
+        <div class="event-section">
+            <div class="section-title">🏭 工場見学</div>
+            <div class="factory-tour">
+                <div style="font-weight: 600; font-size: 1.1rem;">先端技術工場ツアー</div>
+                <div style="margin: 8px 0; color: #475569;">横浜テクノロジーセンター</div>
+                <div class="tour-info">
+                    <span class="tour-time">3/15 14:00 - 17:00</span>
+                </div>
+                <div style="margin-top: 12px;">
+                    <div>• AIロボット製造ライン見学</div>
+                    <div>• 研究開発センター見学</div>
+                    <div>• 質疑応答セッション</div>
+                </div>
+                <div class="tour-limit">⚠️ 定員: 50名 (要事前登録)</div>
+                <div style="margin-top: 16px;">
+                    <button style="background-color: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-weight: 600;">申し込む</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span>🏠</span>
+            <span>ホーム</span>
+        </a>
+        <a href="schedule.html" class="nav-item">
+            <span>📅</span>
+            <span>日程</span>
+        </a>
+        <a href="local.html" class="nav-item">
+            <span>📍</span>
+            <span>現地</span>
+        </a>
+        <a href="events.html" class="nav-item active">
+            <span>📋</span>
+            <span>イベント</span>
+        </a>
+        <a href="attendees.html" class="nav-item">
+            <span>👥</span>
+            <span>出席者</span>
+        </a>
+    </nav>
+</body>
+</html>

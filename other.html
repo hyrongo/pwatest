@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>その他 - 国際会議2026</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background-color: #f5f7fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .page-header {
+            background-color: white;
+            padding: 50px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .back-button {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #1e293b;
+        }
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .content-area {
+            flex: 1;
+            padding: 20px;
+        }
+        .rule-section {
+            background-color: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0b1e33;
+            border-left: 5px solid #2563eb;
+            padding-left: 12px;
+        }
+        .rule-item {
+            padding: 12px;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+        .rule-category {
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+        .rule-desc {
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+        .rule-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            padding-left: 16px;
+            position: relative;
+        }
+        .rule-note::before {
+            content: "※";
+            position: absolute;
+            left: 0;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+        .bottom-nav {
+            display: flex;
+            background-color: white;
+            border-top: 1px solid #e9edf2;
+            padding: 8px 0;
+            margin-top: auto;
+        }
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 4px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-button">←</a>
+        <h1>その他</h1>
+    </header>
+
+    <div class="content-area">
+        <!-- ⑤ 費用負担ルール -->
+        <div class="rule-section">
+            <div class="section-title">💰 費用負担ルール</div>
+            
+            <div class="rule-item">
+                <div class="rule-category">参加登録費</div>
+                <div class="rule-desc">• 一般参加: ¥50,000</div>
+                <div class="rule-desc">• 学生: ¥25,000</div>
+                <div class="rule-desc">• 招待講演者: 無料</div>
+            </div>
+
+            <div class="rule-item">
+                <div class="rule-category">交通費</div>
+                <div class="rule-desc">• 国外参加者: 渡航費補助あり (要申請)</div>
+                <div class="rule-desc">• 国内参加者: 実費負担</div>
+                <div class="rule-note">補助上限額: アジア圏 ¥50,000 / その他 ¥100,000</div>
+            </div>
+
+            <div class="rule-item">
+                <div class="rule-category">宿泊費</div>
+                <div class="rule-desc">• 主催者手配ホテル: 1泊 ¥15,000〜</div>
+                <div class="rule-desc">• 自己手配: 実費負担</div>
+                <div class="rule-note">提携ホテルは公式サイトから予約可</div>
+            </div>
+
+            <div class="rule-item">
+                <div class="rule-category">懇親会</div>
+                <div class="rule-desc">• 参加費: ¥8,000</div>
+                <div class="rule-desc">• 招待者: 無料</div>
+            </div>
+
+            <div class="important-box">
+                <strong>⚠️ 重要</strong>
+                <p style="margin-top: 8px;">費用の精算は会議終了後1ヶ月以内に所定の用紙で申請してください。領収書の原本が必要です。</p>
+            </div>
+        </div>
+
+        <!-- お知らせなど追加情報 -->
+        <div class="rule-section">
+            <div class="section-title">📌 お知らせ</div>
+            <div class="rule-item">
+                <div style="font-weight: 600;">3/14 受付開始時間</div>
+                <div style="color: #475569;">8:30 より受付開始</div>
+            </div>
+            <div class="rule-item">
+                <div style="font-weight: 600;">クローク</div>
+                <div style="color: #475569;">B1階にクロークあり (有料: ¥500/個)</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span>🏠</span>
+            <span>ホーム</span>
+        </a>
+        <a href="schedule.html" class="nav-item">
+            <span>📅</span>
+            <span>日程</span>
+        </a>
+        <a href="local.html" class="nav-item">
+            <span>📍</span>
+            <span>現地</span>
+        </a>
+        <a href="events.html" class="nav-item">
+            <span>📋</span>
+            <span>イベント</span>
+        </a>
+        <a href="attendees.html" class="nav-item">
+            <span>👥</span>
+            <span>出席者</span>
+        </a>
+    </nav>
+</body>
+</html>

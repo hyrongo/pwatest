@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>現地情報 - 国際会議2026</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background-color: #f5f7fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .page-header {
+            background-color: white;
+            padding: 50px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .back-button {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #1e293b;
+        }
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .content-area {
+            flex: 1;
+            padding: 20px;
+        }
+        .info-section {
+            background-color: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0b1e33;
+            border-left: 5px solid #2563eb;
+            padding-left: 12px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .info-item {
+            background-color: #f8fafc;
+            padding: 12px;
+            border-radius: 12px;
+        }
+        .info-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-weight: 600;
+        }
+        .hotel-card, .restaurant-card {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .hotel-icon, .restaurant-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .hotel-info, .restaurant-info {
+            flex: 1;
+        }
+        .hotel-name, .restaurant-name {
+            font-weight: 600;
+        }
+        .hotel-address, .restaurant-address {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        .restaurant-cuisine {
+            display: inline-block;
+            background-color: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            margin-top: 4px;
+        }
+        .bottom-nav {
+            display: flex;
+            background-color: white;
+            border-top: 1px solid #e9edf2;
+            padding: 8px 0;
+            margin-top: auto;
+        }
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 4px;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #0b1e33;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-button">←</a>
+        <h1>現地情報</h1>
+    </header>
+
+    <div class="content-area">
+        <!-- ②-1 現地基本情報 -->
+        <div class="info-section">
+            <div class="section-title">📌 基本情報</div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">気候</div>
+                    <div class="info-value">☀️ 18°C / 10°C</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">通貨</div>
+                    <div class="info-value">💴 日本円 (JPY)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">言語</div>
+                    <div class="info-value">🇯🇵 日本語/英語</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">時差</div>
+                    <div class="info-value">UTC+9</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ②-2 会場情報 -->
+        <div class="info-section">
+            <div class="section-title">🏛️ 会場情報</div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600;">東京国際フォーラム</div>
+                <div style="color: #64748b; font-size: 0.9rem;">〒100-0005 東京都千代田区丸の内3-5-1</div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="background-color: #e2e8f0; padding: 4px 12px; border-radius: 30px;">メインホールA (1F)</span>
+                <span style="background-color: #e2e8f0; padding: 4px 12px; border-radius: 30px;">ルームB (3F)</span>
+                <span style="background-color: #e2e8f0; padding: 4px 12px; border-radius: 30px;">ルームC (5F)</span>
+                <span style="background-color: #e2e8f0; padding: 4px 12px; border-radius: 30px;">ホールD (B1)</span>
+            </div>
+        </div>
+
+        <!-- ②-3 ホテル情報 -->
+        <div class="info-section">
+            <div class="section-title">🏨 提携ホテル</div>
+            <div class="hotel-card">
+                <div class="hotel-icon">🏨</div>
+                <div class="hotel-info">
+                    <div class="hotel-name">ヒルトン東京</div>
+                    <div class="hotel-address">新宿区西新宿6-6-2</div>
+                    <div style="font-size: 0.8rem; margin-top: 4px;">🚌 送迎バス: 7:30 / 8:30</div>
+                </div>
+            </div>
+            <div class="hotel-card">
+                <div class="hotel-icon">🏨</div>
+                <div class="hotel-info">
+                    <div class="hotel-name">マリオット東京</div>
+                    <div class="hotel-address">品川区北品川4-7-36</div>
+                    <div style="font-size: 0.8rem; margin-top: 4px;">🚌 送迎バス: 7:45 / 8:45</div>
+                </div>
+            </div>
+            <div class="hotel-card">
+                <div class="hotel-icon">🏨</div>
+                <div class="hotel-info">
+                    <div class="hotel-name">シェラトン都ホテル</div>
+                    <div class="hotel-address">港区白金台1-1-50</div>
+                    <div style="font-size: 0.8rem; margin-top: 4px;">🚌 送迎バス: 8:00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ②-4 周辺レストラン情報 -->
+        <div class="info-section">
+            <div class="section-title">🍴 周辺レストラン</div>
+            <div class="restaurant-card">
+                <div class="restaurant-icon">🍣</div>
+                <div class="restaurant-info">
+                    <div class="restaurant-name">すし ますもと</div>
+                    <div class="restaurant-address">丸の内3-2-3</div>
+                    <span class="restaurant-cuisine">和食</span>
+                    <span class="restaurant-cuisine">¥¥¥</span>
+                </div>
+            </div>
+            <div class="restaurant-card">
+                <div class="restaurant-icon">🍝</div>
+                <div class="restaurant-info">
+                    <div class="restaurant-name">ラ・ベットラ</div>
+                    <div class="restaurant-address">有楽町2-5-1</div>
+                    <span class="restaurant-cuisine">イタリアン</span>
+                    <span class="restaurant-cuisine">¥¥</span>
+                </div>
+            </div>
+            <div class="restaurant-card">
+                <div class="restaurant-icon">☕</div>
+                <div class="restaurant-info">
+                    <div class="restaurant-name">カフェ・ド・クリエ</div>
+                    <div class="restaurant-address">丸の内1-1-1</div>
+                    <span class="restaurant-cuisine">カフェ</span>
+                    <span class="restaurant-cuisine">¥</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span>🏠</span>
+            <span>ホーム</span>
+        </a>
+        <a href="schedule.html" class="nav-item">
+            <span>📅</span>
+            <span>日程</span>
+        </a>
+        <a href="local.html" class="nav-item active">
+            <span>📍</span>
+            <span>現地</span>
+        </a>
+        <a href="events.html" class="nav-item">
+            <span>📋</span>
+            <span>イベント</span>
+        </a>
+        <a href="attendees.html" class="nav-item">
+            <span>👥</span>
+           
